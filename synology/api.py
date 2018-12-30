@@ -317,7 +317,7 @@ class Event:
     def __init__(self, data):
         """Initialize a Surveillance Station camera."""
         self._camera_id = data['cameraId']
-        self._camera_name = data['cameraName']
+        self._camera_name = data['camera_name']
         self._event_id = data['eventId']
         self._id = data['id']
         self._start_time = data['startTime']
