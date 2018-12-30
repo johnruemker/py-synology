@@ -215,7 +215,7 @@ class Api:
 
         return response['data']['camId']
 
-    def event_list(self, camera_id, **kwargs):
+    def event_list(self, **kwargs):
         """Return a list of events."""
         api = self._api_info['event']
         payload = dict({
