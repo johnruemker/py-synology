@@ -27,6 +27,10 @@ BASE_API_INFO = {
         'name': 'SYNO.SurveillanceStation.HomeMode',
         'version': 1
     },
+    'event': {
+        'name': 'SYNO.SurveillanceStation.Event',
+        'version': 4
+    },
 }
 
 API_NAMES = [api['name'] for api in BASE_API_INFO.values()]
@@ -211,6 +215,24 @@ class Api:
 
         return response['data']['camId']
 
+    def event_list(self, camera_id, **kwargs):
+        """Return a list of events."""
+        api = self._api_info['event']
+        payload = dict({
+            '_sid': self._sid,
+            'api': api['name'],
+            'method': 'List',
+            'version': api['version'],
+        }, **kwargs)
+        response = self._get_json_with_retry(api['url'], payload)
+
+        events = []
+
+        for data in response['data']['events']:
+            events.append(Event(data))
+
+        return events
+
     def _video_stream_url(self, camera_id, video_format='mjpeg'):
         api = self._api_info['video_stream']
 
@@ -287,6 +309,61 @@ class Camera:
     def is_recording(self):
         """Return true if camera is recording."""
         return self._recording_status in RECORDING_STATUS
+
+
+class Event:
+    """An representation of a Synology SurveillanceStation event."""
+
+    def __init__(self, data):
+        """Initialize a Surveillance Station camera."""
+        self._camera_id = data['cameraId']
+        self._camera_name = data['cameraName']
+        self._event_id = data['eventId']
+        self._id = data['id']
+        self._start_time = data['startTime']
+        self._stop_time = data['stopTime']
+        self._file_name = data['name']
+        self._reason = data['reason']
+
+    @property
+    def camera_id(self):
+        """Return id of the camera."""
+        return self._camera_id
+
+    @property
+    def camera_name(self):
+        """Return name of the camera."""
+        return self._camera_name
+
+    @property
+    def event_id(self):
+        """Return event id."""
+        return self._event_id
+
+    @property
+    def id(self):
+        """Return id"""
+        return self._id
+
+    @property
+    def start_time(self):
+        """Return start-time of the event."""
+        return self._start_time
+
+    @property
+    def stop_time(self):
+        """Return stop-time of the event."""
+        return self._stop_time
+
+    @property
+    def file_name(self):
+        """Return file-name of the event."""
+        return self._file_name
+
+    @property
+    def reason(self):
+        """Return reason for the event."""
+        return self._reason
 
 
 class MotionSetting:

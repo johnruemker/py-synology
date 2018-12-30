@@ -67,3 +67,7 @@ class SurveillanceStation:
     def get_home_mode_status(self):
         """Get the state of Home Mode"""
         return self._api.home_mode_status()
+
+    def get_event_list(self):
+        """Get the list of surveillance station events"""
+        return self._api.event_list()
