@@ -319,7 +319,6 @@ class Event:
         self._camera_id = data['cameraId']
         self._camera_name = data['camera_name']
         self._event_id = data['eventId']
-        self._id = data['id']
         self._start_time = data['startTime']
         self._stop_time = data['stopTime']
         self._file_name = data['name']
@@ -339,11 +338,6 @@ class Event:
     def event_id(self):
         """Return event id."""
         return self._event_id
-
-    @property
-    def id(self):
-        """Return id"""
-        return self._id
 
     @property
     def start_time(self):
