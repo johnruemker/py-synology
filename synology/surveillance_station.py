@@ -75,7 +75,7 @@ class SurveillanceStation:
             kwargs['limit'] = limit
         if desc == False:
             kwargs['orderMethod'] = 2
-        if cameraIds != None and len(cameraIds > 0):
+        if cameraIds != None and len(cameraIds) > 0:
             kwargs['cameraIds'] = ','.join(str(x) for x in cameraIds)
         if fromTime != None:
             kwargs['fromTime'] = fromTime
