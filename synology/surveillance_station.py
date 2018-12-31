@@ -68,7 +68,7 @@ class SurveillanceStation:
         """Get the state of Home Mode"""
         return self._api.home_mode_status()
 
-    def get_event_list(self, limit=None, desc=True, cameraIds=None, fromTime=None, toTime=None, ):
+    def get_event_list(self, limit=None, desc=True, cameraIds=None, fromTime=None, toTime=None, reason=None):
         """Get the list of surveillance station events"""
         kwargs = {}
         if limit != None:
@@ -81,5 +81,7 @@ class SurveillanceStation:
             kwargs['fromTime'] = fromTime
         if toTime != None:
             kwargs['toTime'] = toTime
+        if reason != None:
+            kwargs['reason'] = reason
 
         return self._api.event_list(**kwargs)
