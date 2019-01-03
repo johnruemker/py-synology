@@ -323,6 +323,7 @@ class Event:
         self._stop_time = data['stopTime']
         self._file_name = data['name']
         self._reason = data['reason']
+        self._is_complete = data['is_complete']
 
     @property
     def camera_id(self):
@@ -358,6 +359,11 @@ class Event:
     def reason(self):
         """Return reason for the event."""
         return self._reason
+
+    @property
+    def is_complete(self):
+        """Return completion for the event."""
+        return self._is_complete
 
 
 class MotionSetting:
