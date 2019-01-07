@@ -373,6 +373,10 @@ class MotionSetting:
         """Initialize a Surveillance Station motion setting."""
         self._camera_id = camera_id
         self._source = data['source']
+        self._sensitivity = data['sensitivity']
+        self._threshold = data['threshold']
+        self._object_size = data['objectSize']
+        self._percentage = data['percentage']
 
     @property
     def camera_id(self):
@@ -383,6 +387,26 @@ class MotionSetting:
     def is_enabled(self):
         """Return true if motion detection is enabled."""
         return MOTION_DETECTION_SOURCE_DISABLED != self._source
+
+    @property
+    def sensitivity(self):
+        """Return cameras motion sensitivity setting"""
+        return self._sensitivity
+
+    @property
+    def threshold(self):
+        """Return cameras motion threshold setting"""
+        return self._threshold
+
+    @property
+    def object_size(self):
+        """Return cameras motion object size setting"""
+        return self._object_size
+
+    @property
+    def sensitivity(self):
+        """Return cameras motion percentage setting"""
+        return self._percentage
 
 
 class SessionExpiredException(Exception):
