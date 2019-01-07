@@ -51,11 +51,23 @@ class SurveillanceStation:
             camera_id,
             source=MOTION_DETECTION_SOURCE_BY_SURVEILLANCE)
 
+
     def disable_motion_detection(self, camera_id):
         """Disable motion detection for camera matching camera_id."""
         self._api.camera_event_md_param_save(
             camera_id,
             source=MOTION_DETECTION_SOURCE_DISABLED)
+
+    def adjust_motion_detection_params(self, camera_id, sensitivity=None, threshold=None):
+        """Adjust motion detection settings for camera matching camera_id."""
+        kwargs = {}
+        if sensitivity:
+            kwargs["sensitivity"] = sensitivity
+        if threshold:
+            kwargs["threshold"] = threshold
+        self._api.camera_event_md_param_save(
+            camera_id,
+            **kwargs)
 
     def set_home_mode(self, state):
         """Set the state of Home Mode"""
